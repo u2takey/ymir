@@ -15,7 +15,7 @@ import (
 )
 
 // Load loads the router
-func Load(cfg *model.Config) http.Handler {
+func Load(cfg *model.ServerConfig) http.Handler {
 
 	logrus.Debugf("\n\nLoad with config:\n %+v\n\n", cfg)
 
@@ -30,6 +30,21 @@ func Load(cfg *model.Config) http.Handler {
 
 	// svc := service.New(cfg)
 	//svc := &service.Service{}
+
+	// get tjob
+	// add tjob     -> add job (set replica to 0? )
+	// delete tjob  -> selete job
+	// stop tjob    -> scale to 0
+	// restart tjob -> delete job and new one
+
+	// get tresult (tresult is per node result -> summary result)
+	// add tresult : agent -> master
+
+	// ok to start test ?  : agent -> master
+
+	// get node
+
+	// get node monitor
 
 	//e.Use(static.Serve("/", utils.Frontend("dist")))
 

@@ -1,13 +1,13 @@
 package agent
 
 import (
-	"net/http"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/urfave/cli"
 
+	"github.com/arlert/ymir/agent"
 	"github.com/arlert/ymir/model"
-	router "github.com/arlert/ymir/server"
 )
 
 // Command exports the server command.
@@ -22,21 +22,16 @@ var Command = cli.Command{
 			Usage:  "start the agent in debug mode",
 		},
 		cli.StringFlag{
-			EnvVar: "SERVER_ADDR",
-			Name:   "server-addr",
-			Usage:  "server address",
-			Value:  ":5700",
-		},
-		cli.StringFlag{
-			EnvVar: "MASTER_ADDR",
-			Name:   "master-addr",
-			Usage:  "master address",
-		},
-		cli.StringFlag{
 			EnvVar: "KUBERNETE_ADDR",
 			Name:   "kubernete-addr",
 			Usage:  "kubernete addr",
 			Value:  "https://kubernetes.default",
+		},
+		cli.DurationFlag{
+			EnvVar: "DEFAULT_TIMEOUT",
+			Name:   "default-timeout",
+			Usage:  "default timeout of task",
+			Value:  5 * time.Minute,
 		},
 	},
 }
@@ -48,14 +43,10 @@ func server(c *cli.Context) error {
 	} else {
 		logrus.SetLevel(logrus.WarnLevel)
 	}
-	cfg := &model.Config{}
+	cfg := &model.AgentConfig{}
 	cfg.KubeAddr = c.String("kubernete-addr")
-	// setup the server and start the listener
-	handler := router.Load(cfg)
-
-	// start the server
-	return http.ListenAndServe(
-		c.String("server-addr"),
-		handler,
-	)
+	cfg.TaskSetTimeout = c.Duration("default-timeout")
+	agent := agent.New(cfg)
+	agent.RunTasks()
+	return nil
 }

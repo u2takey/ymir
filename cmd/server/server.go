@@ -43,7 +43,7 @@ func server(c *cli.Context) error {
 	} else {
 		logrus.SetLevel(logrus.WarnLevel)
 	}
-	cfg := &model.Config{}
+	cfg := &model.ServerConfig{}
 	cfg.KubeAddr = c.String("kubernete-addr")
 	// setup the server and start the listener
 	handler := router.Load(cfg)

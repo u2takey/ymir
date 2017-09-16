@@ -2,11 +2,11 @@ package utils
 
 import (
 	"encoding/json"
-
-	"github.com/Sirupsen/logrus"
+	"fmt"
 )
 
-func DebugJson(in interface{}) {
+// PrintJSON ...
+func PrintJSON(in interface{}) {
 	buf, _ := json.MarshalIndent(in, "", "	")
-	logrus.Debug(string(buf))
+	fmt.Println(string(buf))
 }

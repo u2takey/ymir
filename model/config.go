@@ -1,6 +1,14 @@
 package model
 
-// Config is server/agent config
-type Config struct {
+import "time"
+
+// ServerConfig is server config
+type ServerConfig struct {
 	KubeAddr string
+}
+
+// AgentConfig ...
+type AgentConfig struct {
+	KubeAddr       string
+	TaskSetTimeout time.Duration
 }

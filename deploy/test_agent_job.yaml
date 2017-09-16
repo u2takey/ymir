@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-service
+  namespace: ymir
+  labels:
+    app: agent-service
+spec:
+  ports:
+  - port: 5678
+    name: server
+  selector:
+    app: ymir-agent-app
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: ymir
+  name: ymir-agent-job
+  labels:
+    name: ymir-agent-job
+spec:
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: ymir-agent-app
+    spec:
+      restartPolicy: Never
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - kube-minion-0
+                - kube-minion-1
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: "app"
+                operator: In
+                values: 
+                - agent-service
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: ymir-agent
+        image: hub.c.163.com/u2takey/ymir:v-agent-test
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: /go/src/github.com/arlert/ymir/taskset
+        - mountPath: /etc/localtime
+          name: tz-config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: agent-test-config
+          items:
+          - key: data
+            path: testtask.go
+      - hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+        name: tz-config 
+
+
