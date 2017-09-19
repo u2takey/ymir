@@ -26,7 +26,6 @@ func Load(cfg *model.ServerConfig) http.Handler {
 	e := gin.New()
 	e.Use(gin.Recovery())
 
-	e.Use(header.NoCache)
 	e.Use(header.Secure)
 	e.Use(header.Version)
 	e.Use(header.Options)

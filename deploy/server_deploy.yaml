@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: ymir-server
-        image: hub.c.163.com/u2takey/ymir:v-test39
+        image: hub.c.163.com/u2takey/ymir:v-test40
         imagePullPolicy: IfNotPresent
         args:
         - server
         - --debug
-        - --agent-image=hub.c.163.com/u2takey/ymir:v-agent-test39
+        - --agent-image=hub.c.163.com/u2takey/ymir:v-agent-test40
         ports:
         - containerPort: 5600
         volumeMounts:
