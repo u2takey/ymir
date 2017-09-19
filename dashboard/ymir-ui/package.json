@@ -9,7 +9,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "embed": "go-bindata -o ../godist/dist_gen.go -pkg godist -prefix='dist' dist/..."
+        "embed": "go-bindata -o ../godist/dist_gen.go -pkg godist -ignore 'map'  -prefix='dist' dist/..."
     },
     "private": true,
     "dependencies": {

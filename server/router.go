@@ -38,7 +38,7 @@ func Load(cfg *model.ServerConfig) http.Handler {
 
 	ex, _ := os.Executable()
 	dir := path.Dir(ex)
-	e.LoadHTMLFiles(path.Join(dir, "../../dashboard/godist/index.html"))
+	e.LoadHTMLFiles(path.Join(dir, "../index.html"))
 	e.Use(historyAPIFallback(), static.Serve("/", utils.Frontend("/")))
 
 	v1group := e.Group("/api/v1")

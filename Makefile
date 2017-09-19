@@ -42,7 +42,7 @@ build_tar:
 
 
 # Tag=$(shell date +'%y%m%d-%H%M%S')
-Tag=test32
+Tag=test35
 ServerImageName=$(ImageDestBase):v-$(Tag)
 AgentImageName=$(ImageDestBase):v-agent-$(Tag)
 
