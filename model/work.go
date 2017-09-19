@@ -8,22 +8,20 @@ import "time"
 type TWork struct {
 	JobName  string
 	WorkID   string
-	Created  time.Time
-	Start    time.Time
-	End      time.Time
 	Replicas int
-	Result   TResult
+	Result   []TResult
+	Instance []TWorkInstance
+	Created  time.Time
 }
 
 // TWorkInstance in a single node....
 type TWorkInstance struct {
 	JobName    string
+	WorkID     string
 	InstanceID string
-	Created    time.Time
-	Start      time.Time
-	End        time.Time
-	Results    TResult
 	NodeName   string
+	Created    time.Time
+	Results    []TResult
 }
 
 // TResult ...

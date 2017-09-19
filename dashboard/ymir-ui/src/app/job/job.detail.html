@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-md-2">
+        <md-sidenav #sidenav mode="side" opened="true">
+            <md-nav-list>
+                <md-list-item (click)="stopJob()"> Stop Job </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item (click)="restartJob()"> Restart Job </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item (click)="editJob()"> Edit Job </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item (click)="deleteJob()"> Delete Job </md-list-item>
+                <md-divider></md-divider>
+            </md-nav-list>
+        </md-sidenav>
+    </div>
+    <div class="col-md-10">
+        <md-toolbar>Test Jobs
+            <div style="margin-left:auto; margin-right:0;">
+                <button md-button (click)="table.rowDetail.expandAllRows()">Expand All</button>
+                <button md-button (click)="table.rowDetail.collapseAllRows()">Collapse All</button>
+            </div>
+        </md-toolbar>
+
+        <ngx-datatable #myTable class='material expandable' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rows]='works'>
+            <ngx-datatable-row-detail [rowHeight]="getRowHeight" #myDetailRow (toggle)="onDetailToggle($event)">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                    <div style="padding-left:10px;">
+                        <ngx-datatable class='material' [rows]='row.Result' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [scrollbarV]="true">
+                            <ngx-datatable-column name="Name">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Name'] }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Start">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Start'] | date:"MMdd-HH:mm:ss" }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="End">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['End'] | date:"MMdd-HH:mm:ss" }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Count">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Count'] }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Max">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Max']/1e6 }}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Avg">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Avg'] /1e6}}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Min">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Min']/1e6 }}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="CodeMap">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['CodeMap'] | json }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                    <div *ngFor="let instance of row.Instance" style="padding-left:25px;padding-top:25px;">
+                        <ngx-datatable class='material' [rows]='instance.Results' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [scrollbarV]="true">
+                            <ngx-datatable-column name="Node">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{instance.NodeName}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Name">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Name'] }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Start">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Start'] | date:"MMdd-HH:mm:ss"}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="End">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['End'] | date:"MMdd-HH:mm:ss"}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Count">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Count'] }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Max">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Max']/1e6 }}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Avg">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Avg'] /1e6}}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Min">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['Min']/1e6 }}ms
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="CodeMap">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ row['CodeMap'] | json }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- Column Templates -->
+            <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+                    </a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="JobName">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <strong>{{ row['JobName'] }} </strong>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="WorkID">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <strong>{{ row['WorkID'] }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Replicas">
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                    <strong>{{ row['Replicas'] }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created">
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                    <strong>{{ row['Created'] }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

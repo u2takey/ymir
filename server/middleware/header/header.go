@@ -49,10 +49,10 @@ func Secure(c *gin.Context) {
 	// c.Header("Content-Security-Policy", "script-src 'self' https://cdnjs.cloudflare.com")
 }
 
-// Version is a middleware function that appends the MALCOLM
+// Version is a middleware function that appends the YMIR
 // version information to the HTTP response. This is intended
 // for debugging and troubleshooting.
 func Version(c *gin.Context) {
-	c.Header("X-MALCOLM-VERSION", version.Version.String())
+	c.Header("X-YMIR-VERSION", version.Version.String())
 	c.Next()
 }

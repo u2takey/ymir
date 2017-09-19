@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: ymir
+  name: ymir-server-deploy
+  labels:
+    name: ymir-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: ymir-server
+    spec:
+      containers:
+      - name: ymir-server
+        image: hub.c.163.com/u2takey/ymir:v-test32
+        imagePullPolicy: IfNotPresent
+        args:
+        - server
+        - --debug
+        - --agent-image=hub.c.163.com/u2takey/ymir:v-agent-test32
+        ports:
+        - containerPort: 5600
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: tz-config
+          readOnly: true
+      volumes:
+      - hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+        name: tz-config         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ymir
+  name: ymir-server
+spec:
+  type: NodePort
+  ports:
+    - name: admin
+      port: 5600
+      targetPort: 5600
+      nodePort: 32560
+  selector:
+    name: ymir-server

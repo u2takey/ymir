@@ -2,14 +2,17 @@ package server
 
 import (
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
 	"github.com/arlert/ymir/model"
-	// "github.com/arlert/malcolm/server/service"
 	"github.com/arlert/ymir/server/middleware/header"
+	"github.com/arlert/ymir/server/service"
+	"github.com/arlert/ymir/utils"
 	_ "github.com/arlert/ymir/utils/loghook"
 	"github.com/arlert/ymir/utils/reqlog"
 )
@@ -28,25 +31,59 @@ func Load(cfg *model.ServerConfig) http.Handler {
 	e.Use(header.Options)
 	e.Use(reqlog.ReqLoggerMiddleware(logrus.New(), time.RFC3339, true))
 
-	// svc := service.New(cfg)
-	//svc := &service.Service{}
+	svc := service.New(cfg)
+	e.GET("ping", svc.GetPing)
 
-	// get tjob
-	// add tjob     -> add job (set replica to 0? )
-	// delete tjob  -> selete job
-	// stop tjob    -> scale to 0
-	// restart tjob -> delete job and new one
+	e.Use(static.Serve("/", utils.Frontend("/")))
 
-	// get tresult (tresult is per node result -> summary result)
-	// add tresult : agent -> master
+	v1group := e.Group("/api/v1")
+	{
+		//-----------------------------------------------------------------
+		// job
+		v1group.GET("/tjobs", svc.GetJobs)
+		v1group.GET("/tjobs/:tjobname", svc.GetJobs)      // get tjob
+		v1group.POST("/tjobs", svc.PostJobs)              // add tjob     -> add job (set replica to 0)
+		v1group.DELETE("/tjobs/:tjobname", svc.DeleteJob) // delete tjob  -> delete job
+		v1group.PUT("/tjobs", svc.PutJob)                 // mod tjob
+		v1group.PATCH("/tjobs/:tjobname", svc.PatchJob)   // stop/restart tjob
 
-	// ok to start test ?  : agent -> master
+		//-----------------------------------------------------------------
+		// tresult
+		v1group.GET("/tresult/:tjobname", svc.GetResult)
+		v1group.GET("/tresult/:tjobname/:tworkid", svc.GetResult)         // get tresult(s)
+		v1group.POST("/tresult", svc.PostResult)                          // add tresult : agent -> master
+		v1group.POST("/tlog/:tjobname/:tworkid/:tinstanceid", svc.GetLog) // get instance log
 
-	// get node
+		//-----------------------------------------------------------------
+		v1group.GET("/taskready/:tjobname", svc.GetReady) // ok to start test ?  : agent -> master
 
-	// get node monitor
+		//-----------------------------------------------------------------
+		// node
+		v1group.GET("/nodes", svc.GetNodes)                        // get nodes
+		v1group.GET("/nodesmetrics/:nodename", svc.GetNodeMetrics) // get node monitor
+	}
 
-	//e.Use(static.Serve("/", utils.Frontend("dist")))
+	// ex, _ := os.Executable()
+	// dir := path.Dir(ex)
+	// e.LoadHTMLFiles(path.Join(dir, "../../dashboard/ymir-ui/dist/index.html"))
+	// e.StaticFile("/favicon.ico", path.Join(dir, "../../dashboard/ymir-ui/dist/favicon.ico"))
+	// e.Static("", path.Join(dir, "../../dashboard/ymir-ui/dist"))
+	// e.Use(historyAPIFallback())
 
 	return e
+}
+
+func historyAPIFallback() gin.HandlerFunc {
+	// Serve Statics
+	return func(c *gin.Context) {
+		if c.Request.Method != "GET" {
+			c.Next()
+		}
+		var contentType = c.Request.Header.Get("Accept")
+		if strings.Contains(contentType, "text/html") {
+			c.HTML(http.StatusOK, "index.html", gin.H{})
+		}
+		c.Next()
+	}
+
 }

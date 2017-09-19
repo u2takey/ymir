@@ -50,6 +50,12 @@
 			"revisionTime": "2017-07-07T20:27:35Z"
 		},
 		{
+			"checksumSHA1": "bGdOim32+2dyKoQEtwW1PNwcdBc=",
+			"path": "github.com/elazarl/go-bindata-assetfs",
+			"revision": "9a6736ed45b44bf3835afeebb3034b57ed329f3e",
+			"revisionTime": "2016-08-22T20:44:01Z"
+		},
+		{
 			"checksumSHA1": "95WQb+qcV7gHpUvZymh7TssLh1Q=",
 			"origin": "k8s.io/apimachinery/vendor/github.com/emicklei/go-restful",
 			"path": "github.com/emicklei/go-restful",
@@ -76,6 +82,12 @@
 			"path": "github.com/ghodss/yaml",
 			"revision": "21de1bffe600f61f4873ae774a60f7a7d37ac9bf",
 			"revisionTime": "2017-07-06T23:48:30Z"
+		},
+		{
+			"checksumSHA1": "xJnBpChUm4Oeyt2QSCqYpStnkTk=",
+			"path": "github.com/gin-gonic/contrib/static",
+			"revision": "4d2dccc9a4541014fec054e483cc76609b97fb16",
+			"revisionTime": "2017-01-18T07:21:49Z"
 		},
 		{
 			"checksumSHA1": "RsNwOto8G8aXIiRrlFn4dtU9q/g=",
@@ -168,6 +180,12 @@
 			"path": "github.com/google/gofuzz",
 			"revision": "24818f796faf91cd76ec7bddd72458fbced7a6c1",
 			"revisionTime": "2017-06-12T17:47:53Z"
+		},
+		{
+			"checksumSHA1": "ZpHvZTLGgl14LUoOrFr5WJhNhqA=",
+			"path": "github.com/hyperboloide/static",
+			"revision": "dc70328f7c5b3dcbc54a2c2b7234af99038717c7",
+			"revisionTime": "2017-02-26T14:40:52Z"
 		},
 		{
 			"checksumSHA1": "76JH56CPxGxa4OYdueYpKao61ek=",
@@ -279,6 +297,11 @@
 			"path": "golang.org/x/net/lex/httplex",
 			"revision": "21de1bffe600f61f4873ae774a60f7a7d37ac9bf",
 			"revisionTime": "2017-07-06T23:48:30Z"
+		},
+		{
+			"checksumSHA1": "kALQxpz+0xx9vn+SdbjA6MQfpCk=",
+			"path": "golang.org/x/sys/unix",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "QQpKbWuqvhmxVr/hfEYdWzzcXRM=",

@@ -5,6 +5,7 @@ import "time"
 // TJob is a test job config, saved as a job
 type TJob struct {
 	Name          string
+	CurWorkID     string
 	Description   string   // Annotation
 	Script        string   // ConfigMap
 	Replicas      int      // NodesSelected

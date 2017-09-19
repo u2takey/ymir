@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <md-card *ngIf="job" class="job-card">
+            <md-card-header>
+                <md-card-title>Edit Job {{ job.Name }} </md-card-title>
+            </md-card-header>
+            <md-card-content>
+                <form class="job-form" (ngSubmit)="onSubmit()" #jobFrom="ngForm">
+
+                    <md-form-field class="job-full-width">
+                        <input required mdInput placeholder="Name" [disabled]="!caneditname" [(ngModel)]="job.Name" name="name">
+                    </md-form-field>
+                    <md-form-field class="job-full-width">
+                        <input mdInput placeholder="Description" [(ngModel)]="job.Description" name="description">
+                    </md-form-field>
+                    <section class="job-edit-section">
+                        <div *ngFor="let node of nodes; let i = index" name="nodes">
+                            <md-checkbox name="node" [checked]="node.checked" (change)="handleChange(element, i)">{{node.metadata.name}}</md-checkbox>
+                        </div>
+                    </section>
+                    <md-form-field class="job-full-width">
+                        <textarea md-autosize mdInput placeholder="Script" style="overflow: auto;" [(ngModel)]="job.ScriptDecode" name="code"></textarea>
+                    </md-form-field>
+                    <button type="submit" class="btn btn-success" [disabled]="!jobFrom.valid">Submit</button>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

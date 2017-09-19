@@ -48,7 +48,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: ymir-agent
-        image: hub.c.163.com/u2takey/ymir:v-agent-test
+        image: hub.c.163.com/u2takey/ymir:v-agent-test11
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: config
@@ -59,9 +59,9 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: agent-test-config
+          name: name12
           items:
-          - key: data
+          - key: script
             path: testtask.go
       - hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai

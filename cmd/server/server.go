@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/urfave/cli"
@@ -32,6 +33,22 @@ var Command = cli.Command{
 			Name:   "kubernete-addr",
 			Usage:  "kubernete addr",
 			Value:  "https://kubernetes.default",
+		}, cli.StringFlag{
+			EnvVar: "JOB_NAMESPACE",
+			Name:   "job-namespace",
+			Usage:  "job namespace",
+			Value:  "ymir",
+		}, cli.DurationFlag{
+			EnvVar: "TIMEOUT_FOR_START",
+			Name:   "timeout-for-start",
+			Usage:  "timeout for start",
+			Value:  time.Minute * 1,
+		},
+		cli.StringFlag{
+			EnvVar: "AGENT_IMAGE",
+			Name:   "agent-image",
+			Usage:  "agent image",
+			Value:  "hub.c.163.com/u2takey/ymir:v-agent-test",
 		},
 	},
 }
@@ -45,6 +62,9 @@ func server(c *cli.Context) error {
 	}
 	cfg := &model.ServerConfig{}
 	cfg.KubeAddr = c.String("kubernete-addr")
+	cfg.JobNamespace = c.String("job-namespace")
+	cfg.TimeoutForStart = c.Duration("timeout-for-start")
+	cfg.AgentImageName = c.String("agent-image")
 	// setup the server and start the listener
 	handler := router.Load(cfg)
 

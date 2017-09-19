@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-2">
+        <md-sidenav #sidenav mode="side" opened="true">
+            <md-nav-list>
+                <md-list-item (click)="newJob()"> New Job </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item (click)="config()"> Config </md-list-item>
+                <md-divider></md-divider>
+            </md-nav-list>
+        </md-sidenav>
+    </div>
+    <div class="col-md-10">
+        <md-toolbar>Test Jobs</md-toolbar>
+        <ngx-datatable [rows]="jobs" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]='jobs' class="material striped ngx-datatable ">
+            <ngx-datatable-column name="Name">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a href="/jobview/{{row.Name}}">{{row.Name}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.Description}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Replicas">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.Replicas}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="NodesSelected">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.NodesSelected}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.Status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.Created}}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

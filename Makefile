@@ -15,11 +15,15 @@ BUILD_NUMBER=$(shell git rev-parse --short HEAD)
 
 all: build_static
 
-
 test:
 	go test -cover $(PACKAGES)
 
+
+
 build: build_static build_cross
+
+build_dashboard:
+	cd dashboard/ymir-ui && npm run build && npm run embed && cd -
 
 build_agent:
 	mkdir -p make/release
@@ -38,7 +42,7 @@ build_tar:
 
 
 # Tag=$(shell date +'%y%m%d-%H%M%S')
-Tag="test"
+Tag=test32
 ServerImageName=$(ImageDestBase):v-$(Tag)
 AgentImageName=$(ImageDestBase):v-agent-$(Tag)
 
@@ -51,6 +55,6 @@ publish_docker: build_docker
 build_docker_agent:
 	docker build -t $(AgentImageName) -f ./agent.Dockerfile . 
 
-push_docker_agent:build_docker_agent
+publish_docker_agent:build_docker_agent
 	docker push $(AgentImageName)
 

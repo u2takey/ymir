@@ -22,16 +22,36 @@ var Command = cli.Command{
 			Usage:  "start the agent in debug mode",
 		},
 		cli.StringFlag{
-			EnvVar: "KUBERNETE_ADDR",
-			Name:   "kubernete-addr",
-			Usage:  "kubernete addr",
-			Value:  "https://kubernetes.default",
+			EnvVar: "MASTER_ADDR",
+			Name:   "master-addr",
+			Usage:  "master addr",
+			Value:  "http://ymir-server:5600",
 		},
 		cli.DurationFlag{
 			EnvVar: "DEFAULT_TIMEOUT",
 			Name:   "default-timeout",
 			Usage:  "default timeout of task",
 			Value:  5 * time.Minute,
+		},
+		cli.StringFlag{
+			EnvVar: "JOB_NAME",
+			Name:   "job-name",
+			Usage:  "job name",
+		},
+		cli.StringFlag{
+			EnvVar: "WORK_ID",
+			Name:   "work-id",
+			Usage:  "work id",
+		},
+		cli.StringFlag{
+			EnvVar: "INSTANCE_ID",
+			Name:   "instance-id",
+			Usage:  "instance id",
+		},
+		cli.StringFlag{
+			EnvVar: "NODE_NAME",
+			Name:   "node-name",
+			Usage:  "node name",
 		},
 	},
 }
@@ -44,8 +64,12 @@ func server(c *cli.Context) error {
 		logrus.SetLevel(logrus.WarnLevel)
 	}
 	cfg := &model.AgentConfig{}
-	cfg.KubeAddr = c.String("kubernete-addr")
+	cfg.MasterAddr = c.String("master-addr")
 	cfg.TaskSetTimeout = c.Duration("default-timeout")
+	cfg.JobName = c.String("job-name")
+	cfg.WorkID = c.String("work-id")
+	cfg.InstanceID = c.String("instance-id")
+	cfg.NodeName = c.String("node-name")
 	agent := agent.New(cfg)
 	agent.RunTasks()
 	return nil
