@@ -91,7 +91,7 @@ func dataTableB0aebd744ce7adb780a9Svg() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "data-table.b0aebd744ce7adb780a9.svg", size: 2666, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "data-table.b0aebd744ce7adb780a9.svg", size: 2666, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -111,7 +111,7 @@ func dataTableBce071e976865da51100Eot() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "data-table.bce071e976865da51100.eot", size: 2524, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "data-table.bce071e976865da51100.eot", size: 2524, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -131,7 +131,7 @@ func faviconIco() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "favicon.ico", size: 5430, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "favicon.ico", size: 5430, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -151,7 +151,7 @@ func indexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "index.html", size: 1104, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "index.html", size: 1104, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -171,7 +171,7 @@ func inlineBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "inline.bundle.js", size: 5823, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "inline.bundle.js", size: 5823, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -191,7 +191,7 @@ func mainBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "main.bundle.js", size: 46954, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "main.bundle.js", size: 46954, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -211,7 +211,7 @@ func polyfillsBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "polyfills.bundle.js", size: 209257, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "polyfills.bundle.js", size: 209257, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -231,7 +231,7 @@ func stylesBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "styles.bundle.js", size: 84409, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "styles.bundle.js", size: 84409, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -251,7 +251,7 @@ func vendorBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "vendor.bundle.js", size: 4831956, mode: os.FileMode(420), modTime: time.Unix(1505787257, 0)}
+	info := bindataFileInfo{name: "vendor.bundle.js", size: 4831956, mode: os.FileMode(420), modTime: time.Unix(1505749471, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -310,13 +310,13 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"data-table.b0aebd744ce7adb780a9.svg": dataTableB0aebd744ce7adb780a9Svg,
 	"data-table.bce071e976865da51100.eot": dataTableBce071e976865da51100Eot,
-	"favicon.ico": faviconIco,
-	"index.html": indexHtml,
-	"inline.bundle.js": inlineBundleJs,
-	"main.bundle.js": mainBundleJs,
-	"polyfills.bundle.js": polyfillsBundleJs,
-	"styles.bundle.js": stylesBundleJs,
-	"vendor.bundle.js": vendorBundleJs,
+	"favicon.ico":                         faviconIco,
+	"index.html":                          indexHtml,
+	"inline.bundle.js":                    inlineBundleJs,
+	"main.bundle.js":                      mainBundleJs,
+	"polyfills.bundle.js":                 polyfillsBundleJs,
+	"styles.bundle.js":                    stylesBundleJs,
+	"vendor.bundle.js":                    vendorBundleJs,
 }
 
 // AssetDir returns the file names below a certain
@@ -358,16 +358,17 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
 	"data-table.b0aebd744ce7adb780a9.svg": &bintree{dataTableB0aebd744ce7adb780a9Svg, map[string]*bintree{}},
 	"data-table.bce071e976865da51100.eot": &bintree{dataTableBce071e976865da51100Eot, map[string]*bintree{}},
-	"favicon.ico": &bintree{faviconIco, map[string]*bintree{}},
-	"index.html": &bintree{indexHtml, map[string]*bintree{}},
-	"inline.bundle.js": &bintree{inlineBundleJs, map[string]*bintree{}},
-	"main.bundle.js": &bintree{mainBundleJs, map[string]*bintree{}},
-	"polyfills.bundle.js": &bintree{polyfillsBundleJs, map[string]*bintree{}},
-	"styles.bundle.js": &bintree{stylesBundleJs, map[string]*bintree{}},
-	"vendor.bundle.js": &bintree{vendorBundleJs, map[string]*bintree{}},
+	"favicon.ico":                         &bintree{faviconIco, map[string]*bintree{}},
+	"index.html":                          &bintree{indexHtml, map[string]*bintree{}},
+	"inline.bundle.js":                    &bintree{inlineBundleJs, map[string]*bintree{}},
+	"main.bundle.js":                      &bintree{mainBundleJs, map[string]*bintree{}},
+	"polyfills.bundle.js":                 &bintree{polyfillsBundleJs, map[string]*bintree{}},
+	"styles.bundle.js":                    &bintree{stylesBundleJs, map[string]*bintree{}},
+	"vendor.bundle.js":                    &bintree{vendorBundleJs, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory
@@ -416,4 +417,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-

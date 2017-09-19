@@ -8,7 +8,6 @@ import (
 	"github.com/Sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
-	kubeerr "k8s.io/apimachinery/pkg/api/errors"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	batch_v1 "k8s.io/client-go/pkg/apis/batch/v1"
 
@@ -162,12 +161,12 @@ func (s *Service) PatchJob(c *gin.Context) {
 		}
 		if err == nil {
 			// retry or poll wait job is deleted
-			for i := 0; i < 5; i++ {
+			for i := 0; i < 10; i++ {
 				_, err = s.engine.Batch().Jobs(s.config.JobNamespace).Create(job)
-				if err == nil || !kubeerr.IsAlreadyExists(err) {
+				if err == nil /*|| !kubeerr.IsAlreadyExists(err) */ {
 					break
 				}
-				time.Sleep(time.Second)
+				time.Sleep(time.Second * time.Duration(i))
 			}
 		}
 	}

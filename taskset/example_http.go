@@ -9,6 +9,7 @@ import (
 )
 
 func init() {
+	task.SetRoutineCount(20)
 	task.Register(task.NewFunc(newhttptest))
 }
 

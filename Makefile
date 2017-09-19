@@ -27,7 +27,7 @@ build_dashboard:
 
 build_agent:
 	mkdir -p make/release
-	go build -o  make/release/ymir -ldflags '${EXTLDFLAGS}-X github.com/arlert/ymir/version.VersionDev=build.$(shell date +'%y%m%d-%H%M%S')' github.com/arlert/ymir/cmd
+	go build -o  make/release/ymir -ldflags '${EXTLDFLAGS}-X github.com/arlert/ymir/version.VersionDev=build.$(shell date +'%y%m%d-%H%M%S')' github.com/arlert/ymir/cmd/agentcmd
 
 build_static:
 	mkdir -p make/release
@@ -42,7 +42,7 @@ build_tar:
 
 
 # Tag=$(shell date +'%y%m%d-%H%M%S')
-Tag=test35
+Tag=test39
 ServerImageName=$(ImageDestBase):v-$(Tag)
 AgentImageName=$(ImageDestBase):v-agent-$(Tag)
 

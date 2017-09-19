@@ -14,7 +14,6 @@ import (
 	"github.com/arlert/ymir/model"
 	"github.com/arlert/ymir/server/middleware/header"
 	"github.com/arlert/ymir/server/service"
-	"github.com/arlert/ymir/utils"
 	_ "github.com/arlert/ymir/utils/loghook"
 	"github.com/arlert/ymir/utils/reqlog"
 )
@@ -39,7 +38,7 @@ func Load(cfg *model.ServerConfig) http.Handler {
 	ex, _ := os.Executable()
 	dir := path.Dir(ex)
 	e.LoadHTMLFiles(path.Join(dir, "../index.html"))
-	e.Use(historyAPIFallback(), static.Serve("/", utils.Frontend("/")))
+	e.Use(historyAPIFallback(), static.Serve("/", service.Frontend("/")))
 
 	v1group := e.Group("/api/v1")
 	{
