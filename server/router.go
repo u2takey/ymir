@@ -2,6 +2,8 @@ package server
 
 import (
 	"net/http"
+	"os"
+	"path"
 	"strings"
 	"time"
 
@@ -34,7 +36,10 @@ func Load(cfg *model.ServerConfig) http.Handler {
 	svc := service.New(cfg)
 	e.GET("ping", svc.GetPing)
 
-	e.Use(static.Serve("/", utils.Frontend("/")))
+	ex, _ := os.Executable()
+	dir := path.Dir(ex)
+	e.LoadHTMLFiles(path.Join(dir, "../../dashboard/godist/index.html"))
+	e.Use(historyAPIFallback(), static.Serve("/", utils.Frontend("/")))
 
 	v1group := e.Group("/api/v1")
 	{
@@ -63,9 +68,6 @@ func Load(cfg *model.ServerConfig) http.Handler {
 		v1group.GET("/nodesmetrics/:nodename", svc.GetNodeMetrics) // get node monitor
 	}
 
-	// ex, _ := os.Executable()
-	// dir := path.Dir(ex)
-	// e.LoadHTMLFiles(path.Join(dir, "../../dashboard/ymir-ui/dist/index.html"))
 	// e.StaticFile("/favicon.ico", path.Join(dir, "../../dashboard/ymir-ui/dist/favicon.ico"))
 	// e.Static("", path.Join(dir, "../../dashboard/ymir-ui/dist"))
 	// e.Use(historyAPIFallback())
@@ -85,5 +87,4 @@ func historyAPIFallback() gin.HandlerFunc {
 		}
 		c.Next()
 	}
-
 }
