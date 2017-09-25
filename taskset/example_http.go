@@ -11,6 +11,7 @@ import (
 func init() {
 	task.SetRoutineCount(20)
 	task.Register(task.NewFunc(newhttptest))
+	task.SetRunTime(time.Minute)
 }
 
 // New ....
@@ -29,10 +30,6 @@ func (h *httptest) Name() string {
 }
 func (h *httptest) Weight() int {
 	return 100
-}
-
-func (h *httptest) RunTime() time.Duration {
-	return 0
 }
 
 func (h *httptest) Tasks() []task.TTask {
