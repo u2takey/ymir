@@ -14,6 +14,9 @@ import { MdButtonModule, MdToolbarModule, MdSidenavModule, MdListModule } from '
 import { MdInputModule, MdCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdCardModule } from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
+
+// In your App's module:
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { MdCardModule } from '@angular/material';
     MdListModule,
     MdCardModule,
     NgxDatatableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ChartsModule
   ],
   providers: [JobService],
   bootstrap: [AppComponent]

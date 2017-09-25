@@ -28,10 +28,6 @@ func (h *hello) Weight() int {
 	return 50
 }
 
-func (h *hello) RunTime() time.Duration {
-	return 0
-}
-
 func (h *hello) Tasks() []task.TTask {
 	return []task.TTask{&hellotask{}}
 }

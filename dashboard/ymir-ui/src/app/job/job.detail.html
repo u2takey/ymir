@@ -68,6 +68,15 @@
                             </ngx-datatable-column>
                         </ngx-datatable>
                     </div>
+
+                    <!-- <div class="row"> -->
+                    <div style="padding-left:20px;">
+                        <!-- <div style="display: block;"> -->
+                        <canvas baseChart width="50" height="15" [datasets]="row.LineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                        <!-- </div> -->
+                    </div>
+                    <!-- </div> -->
+
                     <div *ngFor="let instance of row.Instance" style="padding-left:25px;padding-top:25px;">
                         <ngx-datatable class='material' [rows]='instance.Results' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [scrollbarV]="true">
                             <ngx-datatable-column name="Node">

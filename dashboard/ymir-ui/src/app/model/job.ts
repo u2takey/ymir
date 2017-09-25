@@ -16,6 +16,7 @@ export class TWork {
   Replicas: number;
   Result: TResult[];
   Instance: TWorkI[];
+  LineChartData: Array<any>;
 }
 
 // TWorkInstance in a single node....
