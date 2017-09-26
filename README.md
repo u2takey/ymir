@@ -55,6 +55,23 @@ func SetRoutineCount(c int) {
 ![Alt text](/demo/demo-2.png)
 ![Alt text](/demo/demo-3.png)
 
+
+## Deploy / Develop
+deploy
+
+```
+cd deploy && kubectl create -f server_deploy.yaml
+```
+
+develop
+
+```
+# change ImageDestBase and Tag in makefile
+make build  # build dashboard and binary
+make publish_docker # build and push server docker image
+make publish_docker_agent # build and push agent docker image
+```
+
 ## RoadMap
 - datamodel: done
 - task management: done
