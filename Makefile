@@ -20,10 +20,10 @@ test:
 
 
 
-build: build_static build_cross
+build: build_dashboard build_static build_cross 
 
 build_dashboard:
-	cd dashboard/ymir-ui && npm run build && npm run embed && cd -
+	cd dashboard/ymir-ui && npm run build && npm run embed && cd - && cp dashboard/ymir-ui/dist/index.html make/index.html
 
 build_agent:
 	mkdir -p make/release
@@ -42,7 +42,7 @@ build_tar:
 
 
 # Tag=$(shell date +'%y%m%d-%H%M%S')
-Tag=test40
+Tag=test42
 ServerImageName=$(ImageDestBase):v-$(Tag)
 AgentImageName=$(ImageDestBase):v-agent-$(Tag)
 
